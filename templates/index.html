@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title>Cloud-Demo-test</title>
+    <meta name="description" content="网站描述">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/echarts.min.js"></script>
+    <script type="text/javascript" src="../static/js/china.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+
+    <div id="page-wrapper" class="page-loading">
+        <div class="preloader">
+            <div class="inner">
+                <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
+                <h3 class="text-primary visible-lt-ie10"><strong>Loading..</strong></h3>
+            </div>
+        </div>
+        <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
+            <div id="sidebar">
+                <div id="sidebar-brand" class="themed-background">
+
+                        <span class="sidebar-nav-mini-hide">上海疫情可视化</span>
+
+                </div>
+                <div id="sidebar-scroll">
+                    <div class="sidebar-content">
+                        <ul class="sidebar-nav">
+                            <li>
+                                <a href="/"><i class="sidebar-nav-menu"></i><span class="sidebar-nav-mini-hide">刷新</span></a>
+                            </li>
+                            <li>
+                                <a href="/" class="sidebar-nav-menu"></i><span class="sidebar-nav-mini-hide">疫情时间趋势</span></a>
+
+                            </li>
+                            <li>
+                                <a href="/" class="sidebar-nav-menu"></i><span class="sidebar-nav-mini-hide">确诊分布</span></a>
+
+                            </li>
+                            <li>
+                                <a href="/" class="sidebar-nav-menu"></i><span class="sidebar-nav-mini-hide">无症状分布</span></a>
+
+                            </li>
+                            <li>
+                                <a href="/" class="sidebar-nav-menu"></i><span class="sidebar-nav-mini-hide">ps:刷新可用,其余仅为位置介绍</span></a>
+                            </li>
+                        </ul>
+                        <!-- END Sidebar Navigation -->
+                    </div>
+                </div>
+            </div>
+            <div id="main-container">
+                <header class="navbar navbar-inverse navbar-fixed-top">
+                    <ul class="nav navbar-nav-custom">
+                        <li>
+                            <a href="javascript:void(0)" onclick="Tool.sidebar('toggle-sidebar');this.blur();">
+                                <i class="icon-reorder animation-fadeInRight" id="sidebar-toggle-mini"></i>
+                                <i class="icon-reorder animation-fadeInRight" id="sidebar-toggle-full"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </header>
+                <div id="page-content">
+                   <div id="table" style="width:300px; height:10px;margin: auto"></div>
+                  <table class="table table-bordered">
+                  <tr>
+                    <th>昨日时间</th>
+                    <th>新增确诊</th>
+                    <th>新增无症状</th>
+                  </tr>
+                    {% for i in u %}
+                      <tr>
+                        <td>{{ i[0] }}</td>
+                        <td>{{ i[1] }}</td>
+                        <td>{{ i[2] }}</td>
+                      </tr>
+                    {% endfor %}
+                  </table>
+                    <div id="chart" style="width:auto; height:600px"></div>
+                    <script>
+                        $(
+                            function () {
+                                var chart = echarts.init(document.getElementById('chart'), 'white', {renderer: 'canvas'});
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://127.0.0.1:5000/linechart",
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        chart.setOption(result,window.onresize = chart.resize);
+                                    }
+                                });
+                            }
+                        )
+                    </script>
+
+                    <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/shanghai.js"></script>
+                    <div id="cmap" style="width:auto; height:600px;margin: auto"></div>
+
+                    <script>
+                        $(
+                            function () {
+                                var chart = echarts.init(document.getElementById('cmap'), 'white', {renderer: 'canvas'});
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://127.0.0.1:5000/confirmmap",
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        chart.setOption(result);
+                                    }
+                                });
+                            }
+                        )
+                    </script>
+
+
+                    <div id="wmap" style="width:auto; height:600px;margin: auto"></div>
+                    <script>
+                        $(
+                            function () {
+                                var chart = echarts.init(document.getElementById('wmap'), 'white', {renderer: 'canvas'});
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://127.0.0.1:5000/wzzmap",
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        chart.setOption(result);
+                                    }
+                                });
+                            }
+                        )
+                    </script>
+                    <div>
+                <div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="../static/js/vendor/bootstrap.min.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/tool.js"></script>
+</body>
+</html>
