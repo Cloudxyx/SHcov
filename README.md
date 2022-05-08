@@ -6,3 +6,12 @@ mysql + pyecharts + flask
 
 数据来源：上海本地宝
 
+更新数据
+```
+getData.py
+```
+运行
+```
+app.py
+```
+
