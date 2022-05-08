@@ -2,14 +2,9 @@
 # @Time    : 2022/5/7 16:00
 # @Author  : xyx
 # @Description:
-import os
-from random import randrange
 
-from flask.json import jsonify
 from flask import Flask, render_template
-from flask import request
 from utils import get_today_data
-import pandas as pd
 from myPng.lineSH import sh_total_line
 from myPng.mapSH import sh_cov_cofirm_map, sh_cov_wzz_map
 
