@@ -58,8 +58,8 @@ def getdata():
         for d in qu:
             #         print(time,d,df4.loc[idx,d],df4.loc[idx+1,d])
             data.append((time, d, df4.loc[idx, d], df4.loc[idx + 1, d]))
-    '''
 
+'''
     response2 = requests.get(url2, headers=headers)
     html_doc2 = str(response2.content, 'utf-8')
     df5 = pd.read_html(html_doc2, encoding='utf-8')[0]

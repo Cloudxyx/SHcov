@@ -6,6 +6,8 @@ mysql + pyecharts + flask
 
 数据来源：上海本地宝
 
+数据表结构：日期，区，新增确诊，新增无症状
+
 更新数据
 ```
 getData.py
@@ -14,4 +16,4 @@ getData.py
 ```
 app.py
 ```
-
+> ps:本地宝数据url貌似已失效 .......
