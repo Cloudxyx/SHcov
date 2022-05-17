@@ -17,3 +17,4 @@ getData.py
 app.py
 ```
 > ps:本地宝数据url貌似已失效 ....... :sweat::sweat::sweat:
+> 之前获取的部分数据[截至5.10](data.txt)
